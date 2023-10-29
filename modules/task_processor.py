@@ -1,9 +1,9 @@
 import logging
 import sys
-from model_context import get_watsonx_predictor
-from yes_no_classifier import YesNoClassifier
-from task_performer import TaskPerformer
-from task_rephraser import TaskRephraser
+from modules.model_context import get_watsonx_predictor
+from modules.yes_no_classifier import YesNoClassifier
+from modules.task_performer import TaskPerformer
+from modules.task_rephraser import TaskRephraser
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
@@ -54,24 +54,24 @@ class TaskProcessor:
 
         prompt_instructions = PromptTemplate.from_template(
             """
-Instructions:
-- You are a helpful assistant.
-- You are an expert in Kubernetes and OpenShift.
-- Respond to questions about topics other than Kubernetes and OpenShift with: "I can only answer questions about Kubernetes and OpenShift"
-- Refuse to participate in anything that could harm a human.
-- Your job is to look at the following description and provide a response.
-- Base your answer on the provided task and query and not on prior knowledge.
+            Instructions:
+            - You are a helpful assistant.
+            - You are an expert in Kubernetes and OpenShift.
+            - Respond to questions about topics other than Kubernetes and OpenShift with: "I can only answer questions about Kubernetes and OpenShift"
+            - Refuse to participate in anything that could harm a human.
+            - Your job is to look at the following description and provide a response.
+            - Base your answer on the provided task and query and not on prior knowledge.
 
-TASK:
-{task}
-QUERY:
-{query}
+            TASK:
+            {task}
+            QUERY:
+            {query}
 
-Question:
-Does the above query contain enough background information to complete the task? Provide a yes or no answer with explanation.
+            Question:
+            Does the above query contain enough background information to complete the task? Provide a yes or no answer with explanation.
 
-Response:
-"""
+            Response:
+            """
         )
 
         self.logger.info(conversation + " Beginning task processing")

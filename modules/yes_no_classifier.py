@@ -1,6 +1,6 @@
 import logging, sys
 from string import Template
-from model_context import get_watsonx_predictor
+from modules.model_context import get_watsonx_predictor
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 
