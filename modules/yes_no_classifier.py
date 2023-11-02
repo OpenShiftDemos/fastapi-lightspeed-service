@@ -86,39 +86,3 @@ class YesNoClassifier:
 
         # TODO: handle when this doesn't end up with an integer
         return int(clean_response)
-
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Process a list of tasks")
-    parser.add_argument(
-        "-c",
-        "--conversation-id",
-        default="1234",
-        type=str,
-        help="A short identifier for the conversation",
-    )
-    parser.add_argument(
-        "-q",
-        "--query",
-        default="Yes, we have no bananas",
-        type=str,
-        help="The string to classify",
-    )
-    parser.add_argument(
-        "-m", "--model", default=DEFAULT_MODEL, type=str, help="The model to use"
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        default=False,
-        help="Set Verbose status of langchains [True/False]",
-    )
-
-    args = parser.parse_args()
-
-    yes_no_classifier = YesNoClassifier()
-    yes_no_classifier.classify(
-        args.conversation_id, args.query, model=args.model, verbose=args.verbose
-    )

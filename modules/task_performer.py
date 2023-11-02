@@ -64,39 +64,3 @@ spec:
         # return the response
 
         return response
-
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Perform a task")
-    parser.add_argument(
-        "-c",
-        "--conversation-id",
-        default="1234",
-        type=str,
-        help="A short identifier for the conversation",
-    )
-    parser.add_argument(
-        "-t",
-        "--task",
-        default="Create an autoscaler YAML that scales the cluster up to 10 nodes",
-        type=str,
-        help="A task to perform",
-    )
-    parser.add_argument(
-        "-m", "--model", default=DEFAULT_MODEL, type=str, help="The model to use"
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        default=False,
-        help="Set Verbose status of langchains [True/False]",
-    )
-
-    args = parser.parse_args()
-
-    task_performer = TaskPerformer()
-    task_performer.perform_task(
-        args.conversation_id, args.task, model=args.model, verbose=args.verbose
-    )

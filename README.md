@@ -62,6 +62,23 @@ in order to run the API service
         uvicorn main:app --reload
    ```
 
+the service can also be used via the cli 
+
+   ```sh
+        python cli.py [task] [arguments]
+   ```
+available  arguments:
+
+    breakdown           Search the RAG and find a summary document with tasks
+
+    classifier          Process a list of tasks
+
+    perform             Perform a task
+
+    processor           Process a list of tasks
+
+    rephraser           Rephrase a combination of a task and a user query into a single request
+    
 
 
 <!-- ROADMAP -->

@@ -53,20 +53,20 @@ class TaskRephraser:
 
         prompt_instructions = PromptTemplate.from_template(
             """
-Instructions:
-- You are a helpful assistant.
-- Your job is to combine the information from the task and query into a single, new task.
-- Base your answer on the provided task and query and not on prior knowledge.
+            Instructions:
+            - You are a helpful assistant.
+            - Your job is to combine the information from the task and query into a single, new task.
+            - Base your answer on the provided task and query and not on prior knowledge.
 
-TASK:
-{task}
-QUERY:
-{query}
+            TASK:
+            {task}
+            QUERY:
+            {query}
 
-Please combine the information from the task and query into a single, new task.
+            Please combine the information from the task and query into a single, new task.
 
-Response:
-"""
+            Response:
+            """
         )
 
         self.logger.info(conversation + " Rephrasing task and query")
@@ -83,51 +83,3 @@ Response:
 
         self.logger.info(conversation + " response: " + str(response))
         return response['text']
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description="Rephrase a combination of a task and a user query into a single request"
-    )
-    parser.add_argument(
-        "-c",
-        "--conversation-id",
-        default="1234",
-        type=str,
-        help="A short identifier for the conversation",
-    )
-    parser.add_argument(
-        "-t",
-        "--task",
-        default="1. Make a sandwich with the defined ingredients",
-        type=str,
-        help="A task statement",
-    )
-    parser.add_argument(
-        "-q",
-        "--query",
-        default="Can you make me lunch with ham and cheese?",
-        type=str,
-        help="The user query to use",
-    )
-    parser.add_argument(
-        "-m", "--model", default=DEFAULT_MODEL, type=str, help="The model to use"
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        default=False,
-        help="Set Verbose status of langchains [True/False]",
-    )
-
-    args = parser.parse_args()
-
-    task_rephraser = TaskRephraser()
-    task_rephraser.rephrase_task(
-        args.conversation_id,
-        args.task,
-        args.query,
-        model=args.model,
-        verbose=args.verbose,
-    )

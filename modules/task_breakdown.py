@@ -51,16 +51,16 @@ class TaskBreakdown:
         )
 
         summary_task_breakdown_template_str = """
-The following documentation contains a task list. Your job is to extract the list of tasks. If the user-supplied query seems unrelated to the list of tasks, please reply that you do not know what to do with the query and the summary documentation. Use only the supplied content and extract the task list.
+        The following documentation contains a task list. Your job is to extract the list of tasks. If the user-supplied query seems unrelated to the list of tasks, please reply that you do not know what to do with the query and the summary documentation. Use only the supplied content and extract the task list.
 
-Summary document:
-{context_str}
+        Summary document:
+        {context_str}
 
-User query:
-{query_str}
+        User query:
+        {query_str}
 
-What are the tasks?
-"""
+        What are the tasks?
+        """
         summary_task_breakdown_template = PromptTemplate(
             summary_task_breakdown_template_str
         )
@@ -100,39 +100,3 @@ What are the tasks?
         return str(task_breakdown_response).splitlines(), referenced_documents
 
 
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(
-        description="Search the RAG and find a summary document with tasks"
-    )
-    parser.add_argument(
-        "-c",
-        "--conversation-id",
-        default="1234",
-        type=str,
-        help="A short identifier for the conversation",
-    )
-    parser.add_argument(
-        "-q",
-        "--query",
-        default="What is the weather like today?",
-        type=str,
-        help="The user query to use",
-    )
-    parser.add_argument(
-        "-m", "--model", default=DEFAULT_MODEL, type=str, help="The model to use"
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        default=False,
-        help="Set Verbose status of langchains [True/False]",
-    )
-
-    args = parser.parse_args()
-
-    task_breakdown = TaskBreakdown()
-    task_breakdown.breakdown_tasks(
-        args.conversation_id, args.query, model=args.model, verbose=args.verbose
-    )
